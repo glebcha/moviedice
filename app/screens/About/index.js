@@ -6,6 +6,7 @@ import AppIntro from 'react-native-app-intro-v2';
 import IconIon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { PASSED_INTRO } from '../../constants/general';
+import Notice from './Notice';
 import dice from '../../styles/images/dice.png';
 import styles from './styles';
 
@@ -20,6 +21,7 @@ class About extends PureComponent {
 
 	static get propTypes() {
 		return {
+			general: PropTypes.object.isRequired,
 			navigation: PropTypes.object.isRequired,
 			dispatch: PropTypes.func.isRequired
 		};
@@ -49,7 +51,10 @@ class About extends PureComponent {
 	}
 
 	render() {
-		return (
+		const {general: {orientation}} = this.props;
+		const isPortrait = orientation === 'PORTRAIT';
+
+		return isPortrait ? (
 			<AppIntro
 				rightTextColor="#5a5c6d"
 				leftTextColor="#5a5c6d"
@@ -65,7 +70,9 @@ class About extends PureComponent {
 							<Icon style={{color: '#5a5c6d'}} name="gesture-swipe-right" size={100} />
 						</View>
 						<View>
-							<Text style={[styles.text, {paddingTop: 30}]}>Swipe card left/right to show previous/next movie</Text>
+							<Text style={[styles.text, {paddingTop: 30}]}>
+								Swipe card left/right to show previous/next movie
+							</Text>
 						</View>
 					</View>
 				</View>
@@ -75,7 +82,9 @@ class About extends PureComponent {
 					</View>
 					<View level={20}>
 						<View>
-							<Text style={[styles.text, {paddingTop: 30}]}>Tap dice to show menu or hold shortly to get random movies stack</Text>
+							<Text style={[styles.text, {paddingTop: 30}]}>
+								Tap dice to show menu or hold shortly to get random movies stack
+							</Text>
 						</View>
 					</View>
 				</View>
@@ -85,7 +94,9 @@ class About extends PureComponent {
 					</View>
 					<View level={-10}>
 						<View>
-							<Text style={styles.text}>Tap to add as favorite movie</Text>
+							<Text style={styles.text}>
+								Tap to add as favorite movie
+							</Text>
 						</View>
 					</View>
 				</View>
@@ -95,12 +106,14 @@ class About extends PureComponent {
 					</View>
 					<View level={15}>
 						<View>
-							<Text style={styles.text}>Tap to search similar movies</Text>
+							<Text style={styles.text}>
+								Tap to search similar movies
+							</Text>
 						</View>
 					</View>
 				</View>
 			</AppIntro>
-		);
+		) : <Notice />;
 	}
 }
 
