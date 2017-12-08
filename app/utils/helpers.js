@@ -68,6 +68,10 @@ export function isArray(arr: any) {
 	return arr && Object.prototype.toString.call(arr) === '[object Array]';
 }
 
+export function isObject(obj: any) {
+	return obj && Object.prototype.toString.call(obj) === '[object Object]';
+}
+
 export function getLocale(country: string) {
 	const locales = codes.filter((code: string) => {
 		const splitted = code.split('-');
@@ -85,11 +89,12 @@ export function collectionsDiff(
 	first: Array<any>, 
 	second: Array<any>, 
 	options: {
+		predicate: string,
 		added: boolean,
 		deleted: boolean
-	} = {added: true, deleted: true}
+	} = {predicate: 'id', added: true, deleted: true}
 ) {
-	const {added, deleted} = options;
+	const {predicate, added, deleted} = options;
 	const result = {
 		added: [],
 		deleted: []
@@ -101,7 +106,11 @@ export function collectionsDiff(
 
 	if (added) {
 		first.forEach(file => {
-			const existing = second.filter(state => state.id === file.id);
+			if (!isObject(file)) {
+				return result;
+			} 
+
+			const existing = second.filter(state => state[predicate] === file[predicate]);
 			
 			if (existing.length === 0) {
 				result.added.push(file);
@@ -111,7 +120,11 @@ export function collectionsDiff(
 	
 	if (deleted) {
 		second.forEach(state => {
-			const existing = first.filter(file => file.id === state.id);
+			if (!isObject(state)) {
+				return result;
+			} 
+
+			const existing = first.filter(file => file[predicate] === state[predicate]);
 			
 			if (existing.length === 0) {
 				result.deleted.push(state);
