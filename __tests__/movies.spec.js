@@ -6,13 +6,13 @@ import data from '../__mocks__/data/movies';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
 describe('Movies component', () => {
-    it('should render correctly', () => {
-        const tree = renderer.create(<Movies />).toJSON();
-        expect(tree).toMatchSnapshot();
+	it('should render correctly', () => {
+		const tree = renderer.create(<Movies />).toJSON();
+		expect(tree).toMatchSnapshot();
 	});
 
 	it('should show image while loading movies', () => {
-        const tree = renderer.create(<Movies />).toJSON();
+		const tree = renderer.create(<Movies />).toJSON();
 
 		expect(tree.children).toHaveLength(3);
 		expect(tree.children[1].children[0].children[0]).not.toBeUndefined();
@@ -28,11 +28,11 @@ describe('Movies component', () => {
 	});
 	
 	it('should render movies list', () => {
-		const {page, total_results, total_pages} = data;
+		const {results} = data;
 		const renderer = new ShallowRenderer();
 		const tree = renderer.render(
 			<Movies 
-				items={data.results}
+				items={results}
 				isFetching={false} 
 			/>
 		);
