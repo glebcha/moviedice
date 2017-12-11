@@ -18,12 +18,11 @@ export default class Movie extends Component {
 
 	static get propTypes() {
 		return {
-			item: PropTypes.object.isRequired,
-			genres: PropTypes.object.isRequired,
-			filters: PropTypes.object.isRequired,
-			imageUrl: PropTypes.string.isRequired,
-			loadRandomMovies: PropTypes.func.isRequired,
-			dispatch: PropTypes.func.isRequired
+			item: PropTypes.object,
+			genres: PropTypes.object,
+			filters: PropTypes.object,
+			imageUrl: PropTypes.string,
+			dispatch: PropTypes.func
 		};
 	}
 
@@ -31,7 +30,8 @@ export default class Movie extends Component {
 		item: {},
 		genres: {
 			items: []
-		}
+		},
+		dispatch: () => {},
 	}
 
 	get genreCollection() {
@@ -52,7 +52,7 @@ export default class Movie extends Component {
 	onTitleClick = () => {
 		const {showOverview} = this.state;
 
-		this.setState({showOverview: !showOverview})
+		this.setState({showOverview: !showOverview});
 	}
 
 	loadSimilarMovies = () => {

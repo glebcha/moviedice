@@ -43,6 +43,7 @@ export default class Movies extends PureComponent {
 		loadPrevMovies: () => {},
 		loadNextMovies: () => {},
 		loadRandomMovies: () => {},
+		dispatch: () => {},
 		error: null,
 		isFetching: false
 	}
