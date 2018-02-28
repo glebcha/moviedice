@@ -13,18 +13,20 @@ describe('Movies component', () => {
 
 	it('should show image while loading movies', () => {
 		const tree = renderer.create(<Movies />).toJSON();
+		const renderedTree = tree.children[0].children[0].children[0].children;
 
-		expect(tree.children).toHaveLength(3);
-		expect(tree.children[1].children[0].children[0]).not.toBeUndefined();
-		expect(tree.children[1].children[0].children[0].type).toBe('Image');
+		expect(renderedTree).toHaveLength(2);
+		expect(renderedTree[0]).not.toBeUndefined();
+		expect(renderedTree[0].type).toBe('Image');
 	});
 	
 	it('should not render empty movies list', () => {
 		const tree = renderer.create(<Movies isFetching={false} />).toJSON();
+		const renderedTree = tree.children[0].children[0].children[0].children;
 
-		expect(tree.children).toHaveLength(2);
-		expect(tree.children[0].type).toBe('Text');
-		expect(tree.children[1].type).toBe('Text');
+		expect(renderedTree).toHaveLength(2);
+		expect(renderedTree[1].children[0].type).toBe('Text');
+		expect(renderedTree[1].children[1].type).toBe('Text');
 	});
 	
 	it('should render movies list', () => {
@@ -37,7 +39,7 @@ describe('Movies component', () => {
 			/>
 		);
 
-		expect(tree.props.children[1].props.children).toBeDefined();
-		expect(tree.props.children[1].props.children).toHaveLength(21);
+		expect(tree.props.children[0].props.children).toBeDefined();
+		expect(tree.props.children[0].props.children).toHaveLength(21);
 	});
 });

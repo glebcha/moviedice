@@ -19,13 +19,15 @@ describe('Helper functions', () => {
 		const first = [{id: 1}, {id: 2}, {id: 4}];
 		const second = [{id: 3}];
 		const result = collectionsDiff(first, second);
-		console.log(result);
+		
+		expect(result.deleted).toHaveLength(1);
 	});
 
 	it('should return empty/partial diff for corrupted data', () => {
 		const first = [{id: 1}, {id: 2}, {id: 4}];
 		const second = [[{id: 3}]];
 		const result = collectionsDiff(first, second);
-		console.log(result);
+
+		expect(result.added).toHaveLength(3);
 	});
 });
