@@ -1,6 +1,3 @@
-![Logo](http://i66.tinypic.com/zwyxe8.jpg)
-
-
 Movies suggestion app for Android built with React Native 
 
 
