@@ -12,7 +12,6 @@ Fill your favorites list.
 
 Search similar movies.
 
-## Click screenshot to watch app demo
 
 
-[![Screenshot](http://i67.tinypic.com/rswhno.jpg)](https://www.youtube.com/watch?v=LhfV9O_XCdw)
+[YouTube demo](https://www.youtube.com/watch?v=LhfV9O_XCdw)
